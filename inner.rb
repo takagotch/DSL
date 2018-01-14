@@ -1,3 +1,4 @@
+#
 attr_reader :id, :age
 attr_writer :name
 attr_accessor :color
@@ -27,5 +28,33 @@ end
 def attr_accessor(*symbols)
   attr_reader(symbols)
   attr_writer(symbols)
+end
+
+#rails
+class Library < ActiveRecord::Base
+  has_many :books
+  validates_associated :books
+end
+
+#rake
+task :default => [:test]
+
+task :test do
+  ruby "test/unittest.rb"
+end
+
+#rspec
+describe Bowlind do
+  it "should score 0 for gutter game" do
+    bowling = Bowling.new
+    20.times { bowling.hit(0) }
+    bowling.score.should == 0
+  end
+end
+
+#caspistrano
+role :libs, "takagotch.com"
+task :search_libs do
+  run "ls -x1 /usr/lib | grep -i xml"
 end
 
