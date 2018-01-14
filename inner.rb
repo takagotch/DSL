@@ -14,4 +14,18 @@ class Module
   end
 end
 
+def attr_writer(*symbols)
+  symbols.each do |symbol|
+    class_eval %{
+      def #{symbol}= (value)
+        @#{symbol} = value
+      end
+    }
+  end
+end
+
+def attr_accessor(*symbols)
+  attr_reader(symbols)
+  attr_writer(symbols)
+end
 
